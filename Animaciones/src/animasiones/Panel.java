@@ -4,6 +4,9 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -30,13 +33,29 @@ public class Panel extends JPanel{
 		};
 		addKeyListener(l);
 		
+		final Circulo c2 = new Circulo(0,0,100,Color.BLUE);
+		
+		MouseMotionAdapter mml = new MouseMotionAdapter() {
+
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				int mouseX = e.getX();
+				int mouseY = e.getY();
+				c2.apuntarHacia(mouseX,mouseY);
+			}
+			
+			
+			
+		};
+		addMouseMotionListener(mml);
+		
 		setFocusable(true);
 		setBackground(Color.BLACK);
 		
 		
 		
 		Circulo c1 = new Circulo(100,100,100,Color.RED);
-		Circulo c2 = new Circulo(0,0,100,Color.BLUE);
+		
 		
 		c1.setSpeed(10,1);
 		c2.setSpeed(WIDTH/100.0, HEIGHT/200.0);

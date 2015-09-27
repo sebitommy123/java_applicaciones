@@ -65,4 +65,10 @@ public class Circulo {
 		this.speedY = speedY;
 	}
 
+	public void apuntarHacia(int mouseX, int mouseY) {
+		speedX = (mouseX - x)/Math.sqrt((mouseX - x)*(mouseX - x)+(mouseY - y)*(mouseY - y))*10;
+		speedY = (mouseY - y)/Math.sqrt((mouseX - x)*(mouseX - x)+(mouseY - y)*(mouseY - y))*10;
+		
+	}
+
 }
