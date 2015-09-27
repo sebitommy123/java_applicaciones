@@ -1,7 +1,9 @@
 package animasiones;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 public class Circulo {
 
@@ -11,6 +13,8 @@ public class Circulo {
 	private Color color;
 	private double speedX;
 	private double speedY;
+	private ArrayList<Circulo> hijos = new ArrayList<>();
+	private static int numCirculos = 1;
 
 
 	public Circulo(double x,double y,double radio,Color color){
@@ -49,6 +53,8 @@ public class Circulo {
 
 		comprobarLimites();
 
+		
+		
 		this.x = this.x + speedX;
 		this.y = this.y + speedY;
 
@@ -68,7 +74,24 @@ public class Circulo {
 	public void apuntarHacia(int mouseX, int mouseY) {
 		speedX = (mouseX - x)/Math.sqrt((mouseX - x)*(mouseX - x)+(mouseY - y)*(mouseY - y))*10;
 		speedY = (mouseY - y)/Math.sqrt((mouseX - x)*(mouseX - x)+(mouseY - y)*(mouseY - y))*10;
-		
+		for(Circulo c : hijos){
+			c.apuntarHacia(mouseX, mouseY);
+		}
 	}
+	
+	
+	public void dividir(Panel p){
+		
+		double nuevoRadio = radio/Math.sqrt(2);
+		radio = nuevoRadio;
+		double r = Math.random()*4 -2.0;
+		Circulo c = new Circulo(x+speedX*(10+r),y+speedY*(10+r),nuevoRadio,color);System.out.println("Hay: " + ++numCirculos);
+		p.add(c);
+		for(Circulo cc : hijos){
+			cc.dividir(p);
+		}
+		hijos.add(c);
+	}
+	
 
 }

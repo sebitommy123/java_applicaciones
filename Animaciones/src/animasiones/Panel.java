@@ -6,7 +6,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -17,9 +16,12 @@ public class Panel extends JPanel{
 	public static final double WIDTH = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 	public static final double HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 	
+	final Circulo c2;
+	
 	ArrayList<Circulo> circulos = new ArrayList<>();
 	
 	public Panel(){
+		c2 = new Circulo(0,0,100,Color.BLUE);
 		KeyAdapter l = new KeyAdapter() {
 
 			@Override
@@ -27,13 +29,18 @@ public class Panel extends JPanel{
 				if (e.getKeyCode() == KeyEvent.VK_ESCAPE){
 					System.exit(0);
 				}
+				if (e.getKeyCode() == KeyEvent.VK_SPACE){
+					dividir();
+				}
 				
 			}
+
+			
 			
 		};
 		addKeyListener(l);
 		
-		final Circulo c2 = new Circulo(0,0,100,Color.BLUE);
+		
 		
 		MouseMotionAdapter mml = new MouseMotionAdapter() {
 
@@ -69,6 +76,11 @@ public class Panel extends JPanel{
 		
 	}
 
+	
+	private void dividir() {
+		c2.dividir(this);
+	}
+	
 	private void comenzarAminacion() {
 		Thread t = new Thread(new Runnable() {
 			
@@ -100,6 +112,10 @@ public class Panel extends JPanel{
 		
 		
 		
+	}
+
+	public void add(Circulo c) {
+		circulos.add(c);
 	}
 	
 		
