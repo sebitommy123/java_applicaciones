@@ -46,3 +46,5 @@ Temporary Items
 *.class
 *.class
 Animaciones/bin/animasiones/Circulo.class
+*.class
+Animaciones/bin/animasiones/Panel$1.class
